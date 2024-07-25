@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>ТрансПроект</title>
+</head>
+
+<body>
+    {% block mainblock %}
+    <div class="title">
+        <div class="title-text">ПРИЕМКА ГРУЗА</div>
+    </div>
+    <div class="main-container">
+        
+        <div class="image-container">
+            <div class="image_wrapper">
+                <img src="data:image/jpeg;base64,{{ photo1 }}" alt="Загруженная накладная">
+            </div>
+            <div class="image_wrapper">
+                <img src="data:image/jpeg;base64,{{ photo2 }}" alt="Загруженный номер">
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <div class="btn-prev">
+                <button type="submit" class="process_prev">
+                    <a href="/priemka/" class="process_prev_btn">Назад</a>
+                </button>
+                
+            </div>
+            <div class="btn-next">
+                <button type="submit" class="process_next">
+                    <a href="/priemka/pre_process/savedata" class="process_next_btn">Далее</a>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    {% endblock %}
+</body>
+</html>

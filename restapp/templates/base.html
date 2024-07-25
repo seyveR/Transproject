@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'startpage/startpage.css' %}">
+    <link rel="stylesheet" href="{% static 'priemka/priemka.css' %}">
+    <link rel="stylesheet" href="{% static 'priemka/pre_process.css' %}">
+    <link rel="stylesheet" href="{% static 'priemka/savedata.css' %}">
+    <link rel="stylesheet" href="{% static 'report.css' %}">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,800;1,500&family=Tinos:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.css">
+
+    <link rel="icon" href="{% static 'images/prostor_icon.ico' %}" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.js"></script>
+
+
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+
+    
+    <title>ТрансПроект</title>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="header-line">
+                <div id="header-logo" class="header-logo logo-disp">
+                    <a href="/"><img src="{% static 'files/transproject.svg' %}" alt=""></a>
+                </div>
+
+    
+                <div class="nav">
+                    <a class="nav-item" href="/">Главная</a>
+                    <a class="nav-item" href="/priemka">Приемка</a>
+                    <a class="nav-item" href="/keeping">Хранение</a>
+                    <a class="nav-item" href="/otgruzka">Отгрузка</a>
+                    <a class="nav-item" href="/report">Отчет</a>
+                </div>
+    
+                <div class="btn-menu">
+                    <button id="btn-tool" class="btn-tool display-menu">
+                        <img src="{% static 'files/menu_tool.png' %}" alt="">
+                    </button>
+                    <button id="btn-tool-close" class="btn-tool-close display-cross disp">
+                        <img src="{% static 'files/menu-cross.svg' %}" alt="">
+                    </button>
+                
+
+                    {% if user.is_authenticated %}
+                    <div id="tool-menu" class="tool-menu disp">
+                        <div class="username block">Пользователь: {{ user.username}}</div>
+                        <a class="about-us block" href="/aboutus">О нас</a>
+                        <a class="contact block" href="/contact">Связаться с нами</a>
+                        <div class="btn block">
+                            <a href="/logout">
+                                <button class="button-log">Выйти</button>
+                            </a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div id="tool-menu" class="tool-menu disp">
+                        <a class="about-us block" href="/aboutus">О нас</a>
+                        <a class="contact block" href="/contact">Связаться с нами</a>
+                        <div class="btn block">
+                            <a href="/auth">
+                                <button class="button-log">Войти</button>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const currentUrl = new URL(window.location.href);
+                        const navItems = document.querySelectorAll('.nav-item');
+                                        
+                        function setActiveNavItem() {
+                            // Сбросить стиль для всех элементов
+                            navItems.forEach(item => item.classList.remove('active'));
+                        
+                            // Найти активный элемент
+                            const activeItem = Array.from(navItems).find(item => {
+                                const itemHref = new URL(item.getAttribute('href'), currentUrl.origin);
+                                return currentUrl.pathname === itemHref.pathname ||
+                                       currentUrl.pathname.startsWith(itemHref.pathname + '/');
+                            });
+                        
+                            if (activeItem) {
+                                activeItem.style.color = '#7766AA';
+                                activeItem.style.textDecoration = 'underline';
+                                activeItem.classList.add('active'); // Добавляем класс 'active' для управления стилями через CSS
+                            }
+                        }
+                    
+                        // Вызываем функцию при загрузке страницы
+                        setActiveNavItem();
+                    
+                        // Обработчик события popstate для корректной работы при использовании истории браузера
+                        window.addEventListener('popstate', () => {
+                            setActiveNavItem();
+                        });
+                    });
+
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    {% block mainblock %}
+    {% endblock %}
+
+    {% block info %}
+    {% endblock %}
+
+    <script src="{% static 'js/base.js' %}"></script>
+</body>
+</html>

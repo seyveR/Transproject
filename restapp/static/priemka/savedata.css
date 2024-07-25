@@ -1,0 +1,30 @@
+.datainput-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    font-family: 'Inter';
+    margin: 0px 250px;
+}
+
+.savedata-textinfo {
+    font-size: 16px;
+    color: #000000;
+}
+
+.input-container-right input,
+.input-container-left input {
+    width: 400px;
+    height: 50px;
+    border: 2px solid #49687F;
+    border-radius: 20px;
+    padding: 4px 20px;
+    font-size: 20px;
+    color: #49687F;
+}
+
+.input-container-right input:focus,
+.input-container-left input:focus {
+    border-color: #000000; 
+    color: #000;
+}

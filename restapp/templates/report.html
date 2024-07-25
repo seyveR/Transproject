@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>ТрансПроект</title>
+</head>
+
+<body>
+    {% block mainblock %}
+    <table>
+        <thead>
+            <tr>
+                <th>Номер заявки</th>
+                <th>Поставщик</th>
+                <th>Получатель</th>
+                <th>Груз</th>
+                <th>Масса груза</th>
+                <th>№ договора</th>
+                <th>Дата поставки</th>
+                <th>Тип ТС</th>
+                <th>Номер ТС</th>
+                <th>Дата отгрузки</th>
+                <th>Дата поставки</th>
+            </tr>
+            <tr>
+                <th><input type="text" class="filter-input" placeholder="Фильтр по номеру заявки" id="applicationNumberInput" oninput="updateCargos()"></th>
+                <th><input type="text" class="filter-input" placeholder="Фильтр по поставщику" id="supplierInput" oninput="updateCargos()"></th>
+                <th><input type="text" class="filter-input" placeholder="Фильтр по получателю" id="recipientInput" oninput="updateCargos()"></th>
+                <th><input type="text" class="filter-input" placeholder="Фильтр по грузу" id="cargoDescriptionInput" oninput="updateCargos()"></th>
+                <th><input type="text" class="filter-input" placeholder="Фильтр по массе груза" id="cargoWeightInput" oninput="updateCargos()"></th>
+                <th><input type="text" class="filter-input" placeholder="Фильтр по номеру договора" id="contractNumberInput" oninput="updateCargos()"></th>
+                <th><input type="text" class="filter-input" placeholder="Фильтр по дате поставки" id="deliveryDateInput" oninput="updateCargos()"></th>
+                <th><input type="text" class="filter-input" placeholder="Фильтр по типу ТС" id="vehicleTypeInput" oninput="updateCargos()"></th>
+                <th><input type="text" class="filter-input" placeholder="Фильтр по номеру ТС" id="vehicleNumberInput" oninput="updateCargos()"></th>
+                <th><input type="text" class="filter-input" placeholder="Фильтр по дате отгрузки" id="shipmentDateInput" oninput="updateCargos()"></th>
+                <th><input type="text" class="filter-input" placeholder="Фильтр по дате поставки" id="arrivalDateInput" oninput="updateCargos()"></th>
+            </tr>
+            
+            
+        </thead>
+        <tbody>
+            {% for cargo in page_obj %}
+            <tr>
+                <td>{{ cargo.application_number }}</td>
+                <td>{{ cargo.supplier }}</td>
+                <td>{{ cargo.recipient }}</td>
+                <td>{{ cargo.cargo_description }}</td>
+                <td>{{ cargo.cargo_weight }}</td>
+                <td>{{ cargo.contract_number }}</td>
+                <td>{{ cargo.delivery_date }}</td>
+                <td>{{ cargo.vehicle_type }}</td>
+                <td>{{ cargo.vehicle_number }}</td>
+                <td>{{ cargo.shipment_date }}</td>
+                <td>{{ cargo.arrival_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script>
+                function updateCargos() {
+                    var data = {
+                        'supplier': $('#supplierInput').val().trim(),
+                        'application_number': $('#applicationNumberInput').val().trim(),
+                        'recipient': $('#recipientInput').val().trim(),
+                        'cargo_description': $('#cargoDescriptionInput').val().trim(),
+                        'cargo_weight': $('#cargoWeightInput').val().trim(),
+                        'contract_number': $('#contractNumberInput').val().trim(),
+                        'delivery_date': $('#deliveryDateInput').val().trim(),
+                        'vehicle_type': $('#vehicleTypeInput').val().trim(),
+                        'vehicle_number': $('#vehicleNumberInput').val().trim(),
+                        'shipment_date': $('#shipmentDateInput').val().trim(),
+                        'arrival_date': $('#arrivalDateInput').val().trim()
+                    };
+                    
+                    $.ajax({
+                        url: window.location.href,
+                        type: 'GET',
+                        data: data,
+                        success: function(response) {
+                            console.log(response);
+                            $('tbody').html($(response).find('tbody').html());
+                        }
+                    });
+                }
+            
+                $(document).ready(function() {
+                    $('.filter-input').on('input', function() {
+                        updateCargos();
+                    });
+                });
+            </script>
+    {% endblock %}
+</body>
+</html>

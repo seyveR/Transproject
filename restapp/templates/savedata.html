@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>ТрансПроект</title>
+</head>
+
+<body>
+    {% block mainblock %}
+    <div class="title">
+        <div class="title-text">ПРИЕМКА ГРУЗА</div>
+    </div>
+    
+    {% endblock %}
+
+    {% block info %}
+    <div class="priemka-data">
+        <form method="post" id="data-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="datainput-container">
+                <div class="input-container-left">
+
+                    <div class="savedata-textinfo">
+                        <p>Грузоотправитель</p>
+                    </div>
+                    <input type="text" id="first_name" name="first_name" 
+                        value="Text">
+
+                    <div class="savedata-textinfo">
+                        <p>Грузополучатель</p>
+                    </div>
+                    <input type="text" id="first_name" name="first_name" 
+                        value="Text">
+
+                    <div class="savedata-textinfo">
+                        <p>ИНН</p>
+                    </div>
+                    <input type="text" id="first_name" name="first_name" 
+                        value="Text">
+
+                    <div class="savedata-textinfo">
+                        <p>Дата товарной накладной</p>
+                    </div>
+                    <input type="text" id="first_name" name="first_name" 
+                        value="Text">
+                </div>
+                <div class="input-container-right">
+
+                    <div class="savedata-textinfo">
+                        <p>Номер накладной</p>
+                    </div>
+                    <input type="text" id="first_name" name="first_name" 
+                        value="Text">
+
+                    <div class="savedata-textinfo">
+                        <p>Наименование груза</p>
+                    </div>
+                    <input type="text" id="first_name" name="first_name" 
+                        value="Text">
+
+                    <div class="savedata-textinfo">
+                        <p>Масса груза</p>
+                    </div>
+                    <input type="text" id="first_name" name="first_name" 
+                        value="Text">
+
+                    <div class="savedata-textinfo">
+                        <p>Тип и номер траспортного средства</p>
+                    </div>
+                    <input type="text" id="first_name" name="first_name" 
+                        value="{{ transport_type }}">
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <div class="btn-prev">
+                    <button type="submit" class="process_prev">
+                        <a href="/priemka/pre_process/" class="process_prev_btn">Назад</a>
+                    </button>
+                    
+                </div>
+                <div class="btn-next">
+                    <button type="submit" class="process_next">Сохранить</button>
+                </div>
+            </div>
+
+        </form>
+
+        
+    </div>
+    {% endblock %}
+</body>
+</html>

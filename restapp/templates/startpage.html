@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>ТрансПроект</title>
+</head>
+
+<body>
+
+{% block mainblock %}
+<div class="main-body" style="background-image: url('{% static 'files/back.jpg' %}'); position: relative; width: 101%; height: 86vh;">
+    <div class="startpage-content">
+        <div class="startpage-title">
+            ГРУЗОВАЯ ЛОГИСТИКА
+        </div>
+    
+        <div class="startpage-subtitle">
+            Управление грузоперевозками с помощью<br>
+            искусственного интеллекта
+        </div>
+        
+        {% if not user.is_authenticated %}
+            <div class="startpage-btn">
+                <a href="auth/">
+                    <button class="log-btn">Вход</button>
+                </a>
+            </div>
+        {% endif %}
+        
+    </div>
+    
+    
+</div>
+{% endblock %}
+</body>
+</html>

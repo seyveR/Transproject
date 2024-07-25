@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>ТрансПроект</title>
+</head>
+
+<body>
+    {% block mainblock %}
+    <div class="title">
+        <div class="title-text">ПРИЕМКА ГРУЗА</div>
+    </div>
+    <div class="main-container">
+        <div class="header-content">
+            
+            <div class="main-priem-form">
+                <form method="post" enctype="multipart/form-data" id="upload-form">
+                    {% csrf_token %}
+                    <div class="priem-form-container">
+                        <div class="input-file">
+                            <div class="photo-title">
+                                Загрузите фотографии товарной<br>
+                                накладной и номера траспортного средства
+                            </div>
+                            <div class="file-input-forma">
+                                <label for="photo1" class="file-label">
+                                    Загрузить товарную накладную
+                                    <img src="{% static 'files/cross.svg' %}" alt="cross" id="icon1" class="icon">
+                                </label>
+                                <input type="file" id="photo1" name="photo1" accept=".jpg, .png" style="display: none;">
+                                <div id="error-photo1" class="error-message"></div>
+                            </div>
+                            <div class="file-input-number">
+                                <label for="photo2" class="file-label">
+                                    Загрузить номер ТС
+                                    <img src="{% static 'files/cross.svg' %}" alt="cross" id="icon2" class="icon">
+                                </label>
+                                <input type="file" id="photo2" name="photo2" accept=".jpg, .png" style="display: none;">
+                                <div id="error-photo2" class="error-message"></div>
+                            </div>
+                        </div>
+
+
+                        <div class="transport-types">
+                            <div class="type-title">
+                                Выберите тип транспортного средства
+                            </div>
+                            <div class="transport-type">
+                                <div class="type-transport" data-transport="car">
+                                    <img src="{% static 'files/car.png' %}" alt="car">
+                                </div>
+                                <div class="type-transport" data-transport="train">
+                                    <img src="{% static 'files/train.png' %}" alt="train">
+                                </div>
+                                <div class="type-transport" data-transport="ship">
+                                    <img src="{% static 'files/ship.png' %}" alt="ship">
+                                </div>
+                            </div>
+                            <div id="error-transport" class="error-message"></div>
+                        </div>
+                        <input type="hidden" name="transport_type" id="transport-type">
+                        
+                    </div>
+                    <div class="btn-form-photo-info">
+                        <button type="submit" class="btn-load">Далее</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var transports = document.querySelectorAll('.type-transport');
+            var transportInput = document.getElementById('transport-type');
+            var uploadForm = document.getElementById('upload-form');
+            var errorPhoto1 = document.getElementById('error-photo1');
+            var errorPhoto2 = document.getElementById('error-photo2');
+            var errorTransport = document.getElementById('error-transport');
+    
+            transports.forEach(function(transport) {
+                transport.addEventListener('click', function() {
+                    transports.forEach(function(t) { t.classList.remove('selected'); });
+                    this.classList.add('selected');
+                    transportInput.value = this.getAttribute('data-transport');
+                    errorTransport.textContent = ''; // Clear the error message
+                });
+            });
+    
+            document.getElementById('photo1').addEventListener('change', function() {
+                var icon = document.getElementById('icon1');
+                var label = this.closest('.file-input-forma').querySelector('label');
+                if (this.files && this.files.length > 0) {
+                    icon.src = "{% static 'files/check.svg' %}";
+                    errorPhoto1.textContent = ''; // Clear the error message
+                    label.classList.remove('error'); // Remove error class
+                } else {
+                    icon.src = "{% static 'files/cross.svg' %}";
+                }
+            });
+    
+            document.getElementById('photo2').addEventListener('change', function() {
+                var icon = document.getElementById('icon2');
+                var label = this.closest('.file-input-number').querySelector('label');
+                if (this.files && this.files.length > 0) {
+                    icon.src = "{% static 'files/check.svg' %}";
+                    errorPhoto2.textContent = ''; // Clear the error message
+                    label.classList.remove('error'); // Remove error class
+                } else {
+                    icon.src = "{% static 'files/cross.svg' %}";
+                }
+            });
+    
+            uploadForm.addEventListener('submit', function(event) {
+                var isValid = true;
+    
+                var photo1Label = document.querySelector('.file-input-forma label');
+                var photo2Label = document.querySelector('.file-input-number label');
+    
+                if (!document.getElementById('photo1').files.length) {
+                    errorPhoto1.textContent = 'Загрузите товарную накладную';
+                    photo1Label.classList.add('error'); // Add error class
+                    isValid = false;
+                }
+    
+                if (!document.getElementById('photo2').files.length) {
+                    errorPhoto2.textContent = 'Загрузите номер ТС';
+                    photo2Label.classList.add('error'); // Add error class
+                    isValid = false;
+                }
+    
+                if (!transportInput.value) {
+                    errorTransport.textContent = 'Выберите тип транспортного средства';
+                    isValid = false;
+                }
+    
+                if (!isValid) {
+                    event.preventDefault(); // Prevent form submission
+                }
+            });
+        });
+    </script>
+    
+
+    {% endblock %}
+</body>
+</html>
