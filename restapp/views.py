@@ -15,6 +15,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+import requests
 
 class LoginMixin(LoginRequiredMixin, View):
     login_url = reverse_lazy('auth') 
@@ -50,7 +51,7 @@ class PriemkaView(LoginMixin):
             original_image_content2 = base64.b64encode(buffered2.getvalue()).decode('utf-8')
 
             request.session['photo1'] = original_image_content1
-            request.session['photo2'] = original_image_content2
+            request.session['car_number_photo'] = original_image_content2
             request.session['transport_type'] = transport_type
 
             return HttpResponseRedirect(reverse('pre_process'))
@@ -61,16 +62,38 @@ class PriemkaView(LoginMixin):
 class PreProcessView(LoginMixin):
     def get(self, request: HttpRequest):
         photo1 = request.session.get('photo1')
-        photo2 = request.session.get('photo2')
+        car_number_photo = request.session.get('car_number_photo')
 
-        if not photo1 or not photo2:
+        if not photo1 or not car_number_photo:
             return redirect('priemka')
 
         context = {
             'photo1': photo1,
-            'photo2': photo2,
+            'car_number_photo': car_number_photo,
         }
         return render(request, 'pre_process.html', context)
+    
+    def post(self, request: HttpRequest):
+        car_number_photo = request.session.get('car_number_photo')
+
+        decoded_car_image = base64.b64decode(car_number_photo)
+        buffer = io.BytesIO(decoded_car_image)
+        # image_car = Image.open(io.BytesIO(decoded_car_image))
+
+        # files = {'file': ('car_number.png', car_number_photo, 'image/png')}
+
+        if car_number_photo:
+            response = requests.post('https://d1d6-185-211-159-112.ngrok-free.app/predictions/plate_detect', data=buffer)
+            if response.status_code == 200:
+                car_number = response.text 
+                print(car_number)
+                request.session['car_number'] = car_number
+                return HttpResponseRedirect(reverse('savedata'))
+            else:
+                print('mistake')
+                return render(request, 'pre_process.html', {'error': 'проблемка отправки'})
+        else:
+            return render(request, 'pre_process.html', {'error': 'нет фото в сессии'})
 
 
 class SaveDataView(LoginMixin):

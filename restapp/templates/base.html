@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{% static 'priemka/pre_process.css' %}">
     <link rel="stylesheet" href="{% static 'priemka/savedata.css' %}">
     <link rel="stylesheet" href="{% static 'report.css' %}">
+    <link rel="stylesheet" href="{% static 'auth.css' %}">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,19 +52,40 @@
                 </div>
     
                 <div class="btn-menu">
-                    <button id="btn-tool" class="btn-tool display-menu">
+                    <input type="checkbox" id="menu-check">
+                    <label for="menu-check">
+                        <i class="fas fa-bars">
+                            <img src="{% static 'files/menu_tool.svg' %}" alt="">
+                        </i>
+                        <i class="fas fa-times">
+                            <img src="{% static 'files/menu-cross.svg' %}" alt="">
+                        </i>
+                    </label>
+                    <!-- <div id="white-rectangle"></div> -->
+                    
+                    <!-- <button id="btn-tool" class="btn-tool display-menu">
                         <img src="{% static 'files/menu_tool.png' %}" alt="">
                     </button>
                     <button id="btn-tool-close" class="btn-tool-close display-cross disp">
                         <img src="{% static 'files/menu-cross.svg' %}" alt="">
-                    </button>
-                
+                    </button> -->
 
                     {% if user.is_authenticated %}
-                    <div id="tool-menu" class="tool-menu disp">
+                    <div id="tool-menu" class="tool-menu">
+                        <div id="tool-logo" class="tool-logo">
+                            <a href="/"><img src="{% static 'files/transproject-white.svg' %}" alt=""></a>
+                        </div>
                         <div class="username block">Пользователь: {{ user.username}}</div>
-                        <a class="about-us block" href="/aboutus">О нас</a>
-                        <a class="contact block" href="/contact">Связаться с нами</a>
+                        <div class="nav-menu">
+                            <a class="nav-menu-item block" href="/">Главная</a>
+                            <a class="nav-menu-item block" href="/priemka">Приемка</a>
+                            <a class="nav-menu-item block" href="/keeping">Хранение</a>
+                            <a class="nav-menu-item block" href="/otgruzka">Отгрузка</a>
+                            <a class="nav-menu-item block" href="/report">Отчет</a>
+                            <a class="nav-menu-item block" href="/aboutus">О нас</a>
+                            <a class="nav-menu-item block" href="/contact">Связаться с нами</a>
+                        </div>
+                        
                         <div class="btn block">
                             <a href="/logout">
                                 <button class="button-log">Выйти</button>
@@ -71,9 +93,20 @@
                         </div>
                     </div>
                     {% else %}
-                    <div id="tool-menu" class="tool-menu disp">
-                        <a class="about-us block" href="/aboutus">О нас</a>
-                        <a class="contact block" href="/contact">Связаться с нами</a>
+                    <div id="tool-menu" class="tool-menu">
+                        <div id="tool-logo" class="tool-logo">
+                            <a href="/"><img src="{% static 'files/transproject-white.svg' %}" alt=""></a>
+                        </div> 
+                        <div class="nav-menu">
+                            <a class="nav-menu-item block" href="/">Главная</a>
+                            <a class="nav-menu-item block" href="/priemka">Приемка</a>
+                            <a class="nav-menu-item block" href="/keeping">Хранение</a>
+                            <a class="nav-menu-item block" href="/otgruzka">Отгрузка</a>
+                            <a class="nav-menu-item block" href="/report">Отчет</a>
+                            <a class="nav-menu-item block" href="/aboutus">О нас</a>
+                            <a class="nav-menu-item block" href="/contact">Связаться с нами</a>
+                        </div>
+                        
                         <div class="btn block">
                             <a href="/auth">
                                 <button class="button-log">Войти</button>
@@ -101,6 +134,39 @@
                         
                             if (activeItem) {
                                 activeItem.style.color = '#7766AA';
+                                activeItem.style.textDecoration = 'underline';
+                                activeItem.classList.add('active'); // Добавляем класс 'active' для управления стилями через CSS
+                            }
+                        }
+                    
+                        // Вызываем функцию при загрузке страницы
+                        setActiveNavItem();
+                    
+                        // Обработчик события popstate для корректной работы при использовании истории браузера
+                        window.addEventListener('popstate', () => {
+                            setActiveNavItem();
+                        });
+                    });
+
+                </script>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const currentUrl = new URL(window.location.href);
+                        const navItems = document.querySelectorAll('.nav-menu-item');
+                                        
+                        function setActiveNavItem() {
+                            // Сбросить стиль для всех элементов
+                            navItems.forEach(item => item.classList.remove('active'));
+                        
+                            // Найти активный элемент
+                            const activeItem = Array.from(navItems).find(item => {
+                                const itemHref = new URL(item.getAttribute('href'), currentUrl.origin);
+                                return currentUrl.pathname === itemHref.pathname ||
+                                       currentUrl.pathname.startsWith(itemHref.pathname + '/');
+                            });
+                        
+                            if (activeItem) {
+                                activeItem.style.color = '#EB150E';
                                 activeItem.style.textDecoration = 'underline';
                                 activeItem.classList.add('active'); // Добавляем класс 'active' для управления стилями через CSS
                             }

@@ -14,30 +14,34 @@
     <div class="title">
         <div class="title-text">ПРИЕМКА ГРУЗА</div>
     </div>
-    <div class="main-container">
-        
-        <div class="image-container">
-            <div class="image_wrapper">
-                <img src="data:image/jpeg;base64,{{ photo1 }}" alt="Загруженная накладная">
-            </div>
-            <div class="image_wrapper">
-                <img src="data:image/jpeg;base64,{{ photo2 }}" alt="Загруженный номер">
-            </div>
-        </div>
+    <div class="main-container"> 
 
-        <div class="btn-container">
-            <div class="btn-prev">
-                <button type="submit" class="process_prev">
-                    <a href="/priemka/" class="process_prev_btn">Назад</a>
-                </button>
-                
+        <form method="post" enctype="multipart/form-data" id="upload-form">
+            {% csrf_token %}
+            <div class="pre_process-from-container">
+                <div class="image-container">
+                    <div class="image_wrapper">
+                        <img src="data:image/jpeg;base64,{{ photo1 }}" alt="Загруженная накладная">
+                    </div>
+                    <div class="image_wrapper">
+                        <img src="data:image/jpeg;base64,{{ car_number_photo }}" alt="Загруженный номер">
+                    </div>
+                </div>
             </div>
-            <div class="btn-next">
-                <button type="submit" class="process_next">
-                    <a href="/priemka/pre_process/savedata" class="process_next_btn">Далее</a>
-                </button>
+
+            
+            <div class="btn-container">
+                <div class="btn-prev">
+                    <button class="process_prev">
+                        <a href="/priemka/" class="process_prev_btn">Назад</a>
+                    </button>
+                    
+                </div>
+                <div class="btn-next">
+                    <button type="submit" class="btn-load">Далее</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
     
     {% endblock %}

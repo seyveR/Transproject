@@ -12,7 +12,11 @@
 <body>
 
 {% block mainblock %}
-<div class="main-body" style="background-image: url('{% static 'files/back.jpg' %}'); position: relative; width: 101%; height: 86vh;">
+<div class="main-body">
+    <div class="background-overlay" style="background-image: url('{% static 'files/back.jpg' %}'); width: 101%;">
+
+    </div>
+    {% if not user.is_authenticated %}
     <div class="startpage-content">
         <div class="startpage-title">
             ГРУЗОВАЯ ЛОГИСТИКА
@@ -23,15 +27,15 @@
             искусственного интеллекта
         </div>
         
-        {% if not user.is_authenticated %}
-            <div class="startpage-btn">
-                <a href="auth/">
-                    <button class="log-btn">Вход</button>
-                </a>
-            </div>
-        {% endif %}
-        
+        <div class="startpage-btn">
+            <a href="auth/">
+                <button class="log-btn">Вход</button>
+            </a>
+        </div>
     </div>
+    {% else %}
+
+    {% endif %}
     
     
 </div>

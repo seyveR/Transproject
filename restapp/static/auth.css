@@ -1,11 +1,3 @@
-body {
-    display: flex;
-    justify-content: center; /* Выравнивание контента по центру по горизонтали */
-    align-items: center; /* Выравнивание контента по центру по вертикали */
-    height: 100vh; /* Высота равна высоте окна браузера */
-    margin: 0; /* Убираем внешние отступы */
-}
-
 .top-image {
     position: fixed;
     top: 0;
@@ -128,7 +120,7 @@ body {
     height: 25px;
 }
 
-.error-message {
+.error-message-login {
     color: red;
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
