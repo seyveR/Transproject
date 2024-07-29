@@ -15,49 +15,54 @@
 
 <body>
     {% block mainblock %}
-    <div class="authreg-container">
+    
+    <div class="main-body-login">
+        <div class="background-overlay-login" style="background-image: url('{% static 'files/back.jpg' %}'); width: 101%;">
+
+        </div>
+        
         <div class="authreg-content">
-            <div class="welcome">
-                Добро пожаловать
+            
+            
+            <div class="auth-photo">
+                <img src="{% static 'files/auth-photo.jpg' %}" alt="">
             </div>
-            <div class="authreg-user-info">
-                
-                <div class="authreg-form">
-                    <form method="post" id="authregForm">
-                        {% csrf_token %}
-                        <div class="input-container">
-                            <div class="authreg-hello">
-                                <p>Мы рады видеть вас снова</p>
-                            </div>
-                            <input type="text" id="username" name="username" placeholder="Имя пользователя" required>
-                            <div class="password-container">
-                                <div class="password-input">
-                                    <input type="password" id="password" name="password" placeholder="Пароль" required>
-                                    <img src="{% static 'files/hidden.png' %}" class="toggle-password" onclick="togglePasswordVisibility()" alt="Показать пароль">
-                                </div>
-                            </div>
 
-                            <script>
-                                function togglePasswordVisibility() {
-                                  var passwordInput = document.getElementById("password");
-                                  var toggleIcon = document.querySelector(".toggle-password");
-
-                                  if (passwordInput.type === "password") {
-                                    passwordInput.type = "text";
-                                    toggleIcon.src = "{% static 'files/eye.png' %}";
-                                    toggleIcon.alt = "Скрыть пароль";
-                                  } else {
-                                    passwordInput.type = "password";
-                                    toggleIcon.src = "{% static 'files/hidden.png' %}";
-                                    toggleIcon.alt = "Показать пароль";
-                                  }
-                                }
-                            </script>
-                        </div>
-                        <button type="submit">Войти</button>
-                    </form>
+            <div class="authreg-form">
+                <div class="authreg-hello">
+                    <p>ВХОД</p>
                 </div>
-                
+                <form method="post" id="authregForm">
+                    {% csrf_token %}
+                    <div class="input-container">
+                        <input type="text" id="username" name="username" placeholder="Имя пользователя" required>
+                        <img src="{% static 'files/profile-icon.svg' %}" class="toggle-profile" alt="Введите username">
+                        <div class="password-container">
+                            <div class="password-input">
+                                <input type="password" id="password" name="password" placeholder="Пароль" required>
+                                <img src="{% static 'files/hidden.svg' %}" class="toggle-password" onclick="togglePasswordVisibility()" alt="Показать пароль">
+                            </div>
+                        </div>
+
+                        <script>
+                            function togglePasswordVisibility() {
+                                var passwordInput = document.getElementById("password");
+                                var toggleIcon = document.querySelector(".toggle-password");
+
+                                if (passwordInput.type === "password") {
+                                passwordInput.type = "text";
+                                toggleIcon.src = "{% static 'files/eye.svg' %}";
+                                toggleIcon.alt = "Скрыть пароль";
+                                } else {
+                                passwordInput.type = "password";
+                                toggleIcon.src = "{% static 'files/hidden.svg' %}";
+                                toggleIcon.alt = "Показать пароль";
+                                }
+                            }
+                        </script>
+                    </div>
+                    <button class="btn-login" type="submit">Войти</button>
+                </form>
             </div>
             {% if error_message %}
                 <p class="error-message-login">{{ error_message }}</p>

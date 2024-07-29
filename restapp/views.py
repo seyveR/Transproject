@@ -76,14 +76,18 @@ class PreProcessView(LoginMixin):
     def post(self, request: HttpRequest):
         car_number_photo = request.session.get('car_number_photo')
 
+
         decoded_car_image = base64.b64decode(car_number_photo)
         buffer = io.BytesIO(decoded_car_image)
         # image_car = Image.open(io.BytesIO(decoded_car_image))
 
-        # files = {'file': ('car_number.png', car_number_photo, 'image/png')}
+        files = {
+            "base64Image": car_number_photo
+            }
+
 
         if car_number_photo:
-            response = requests.post('https://d1d6-185-211-159-112.ngrok-free.app/predictions/plate_detect', data=buffer)
+            response = requests.post('https://70c2-95-54-230-29.ngrok-free.app/predict_plate_text', json=files)
             if response.status_code == 200:
                 car_number = response.text 
                 print(car_number)
@@ -91,16 +95,18 @@ class PreProcessView(LoginMixin):
                 return HttpResponseRedirect(reverse('savedata'))
             else:
                 print('mistake')
-                return render(request, 'pre_process.html', {'error': 'проблемка отправки'})
+                request.session['car_number'] = 'Не удалось обработать фотографию'
+                return HttpResponseRedirect(reverse('savedata'))
         else:
             return render(request, 'pre_process.html', {'error': 'нет фото в сессии'})
 
 
 class SaveDataView(LoginMixin):
     def get(self, request: HttpRequest):
-        photo1 = request.session.get('photo1')
-        photo2 = request.session.get('photo2')
+        # photo1 = request.session.get('photo1')
+        # photo2 = request.session.get('photo2')
         transport_type = request.session.get('transport_type')
+        car_number = request.session.get('car_number')
 
         # decoded_image = base64.b64decode(photo2)
         # image = Image.open(io.BytesIO(decoded_image))
@@ -116,6 +122,7 @@ class SaveDataView(LoginMixin):
 
         context = {
             'transport_type': transport_type,
+            'car_number': car_number,
         }
 
         return render(request, 'savedata.html', context)

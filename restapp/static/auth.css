@@ -1,84 +1,141 @@
-.top-image {
-    position: fixed;
-    top: 0;
-    right: 100px;
-    z-index: 9999; /* Число, задающее порядок слоя элемента */
+.main-body-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-family: 'Inter';
+    height: 87vh;
+    width: 101%;
 }
 
-.bottom-left-image {
-    position: fixed;
-    bottom: 50px;
+.background-overlay-login {
+    position: absolute;
+    top: 0;
     left: 0;
-    z-index: 9999; /* Число, задающее порядок слоя элемента */
+    width: 100%;
+    height: 100%;
+    /* background-image: url('{% static 'files/back.jpg' %}'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: -1; /* Ставим фон за контент */
+}
+
+.main-body-login::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Чёрный цвет с 50% непрозрачностью */
+    z-index: 1; /* Расположим перед содержимым */
+}
+
+
+
+.authreg-content {
+    font-family: 'Inter';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    z-index: 10;
+}
+
+.auth-photo img{
+    width: 490px;
+    height: 460px;
+}
+
+.auth-photo {
+    padding: 5px;
+}
+
+
+.authreg-hello {
+    position: relative;
+    font-size: 28px;
+    color: #1C425F;
+    font-weight: 700;
+    margin-bottom: 100px;
+}
+
+
+.input-container {
+    margin-bottom: 100px;
 }
 
 .authreg-user-info {
     margin-top: 50px;
 }
 
-.authreg-container {
-    margin-bottom: 10px; 
-    width: 80%; /* Пример: увеличиваем ширину контейнера до 80% от ширины родительского элемента */
-    max-width: 800px; /* Пример: устанавливаем максимальную ширину контейнера */
-    margin: 0 auto; /* Центрируем контейнер по горизонтали */
+.authreg-form {
+    position: relative;
+    text-align: center; 
+    width: 300px;
 }
 
 .authreg-form input {
     width: 80%; /* Ширина поля для ввода будет на 30px меньше ширины родительского контейнера */
     max-width: 900px; /* Максимальная ширина поля для ввода */
-    height: 30px;
-    font-size: 20px;
+    height: 40px;
+    font-size: 18px;
     padding: 15px;
     margin-bottom: 10px; /* Отступ между полями для ввода */
-    border: 1px solid #000;
-    border-radius: 8px;
+    border: 2px solid #1C425F;
+    border-radius: 12px;
 }
 
 .authreg-form input::placeholder {
     color: #aaa;
 }
 
-.authreg-form {
-    margin-top: -30px;
-    color: #000;
+.password-container {
     position: relative;
-    text-align: center; /* Центрируем дочерние элементы */
 }
 
 
-.authreg-form button {
-    width: 50%; /* Ширина кнопки будет 50% ширины родительского контейнера (поля для ввода) */
-    max-width: 350px; /* Максимальная ширина кнопки */
+.password-input input {
+    width: 80%;
+}
+
+.toggle-profile,
+.toggle-password {
+    position: absolute;
+    right: 80px;
+    top: 45%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.toggle-profile img,
+.password-input img {
+    width: 20px;
+    height: 20px;
+}
+
+
+.btn-login {
+    width: 80%;
     margin: 0 auto; /* Для выравнивания кнопки по центру */
     background-color: #1C425F;
     color: #fff;
     text-decoration: none;
-    padding: 18px 30px;
-    font-size: 25px;
+    padding: 8px 30px;
+    font-size: 20px;
     font-weight: 500;
     border-radius: 15px;
     border: 2px solid transparent;
 }
 
-.authreg-form button:hover {
+.btn-login:hover {
     background-color: #fff;
     color: #1C425F;
     border-color: #1C425F;
 }
 
-.authreg-hello {
-    font-size: 20px;
-}
-
-.welcome {
-    font-size: 40px;
-    color: #000;
-    font-weight: bold;
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-}
-
-.authreg-redirect {
+/* .authreg-redirect {
     font-size: 16px;
     color: #000;
     font-family: 'Open Sans', sans-serif;
@@ -94,31 +151,9 @@
 
 .authreg-redirect:hover a{
     color:#aaa; 
-}
+} */
 
 
-
-.password-container {
-    position: relative;
-}
-
-
-.password-input input {
-    width: 80%;
-}
-
-.toggle-password {
-    position: absolute;
-    right: 80px;
-    top: 45%;
-    transform: translateY(-50%);
-    cursor: pointer;
-}
-
-.password-input img {
-    width: 25px;
-    height: 25px;
-}
 
 .error-message-login {
     color: red;
