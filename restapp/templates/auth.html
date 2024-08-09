@@ -35,8 +35,13 @@
                 <form method="post" id="authregForm">
                     {% csrf_token %}
                     <div class="input-container">
-                        <input type="text" id="username" name="username" placeholder="Имя пользователя" required>
-                        <img src="{% static 'files/profile-icon.svg' %}" class="toggle-profile" alt="Введите username">
+                        <div class="username-container">
+                            <div class="username-input">
+                                <input type="text" id="username" name="username" placeholder="Имя пользователя" required>
+                                <img src="{% static 'files/profile-icon.svg' %}" class="toggle-profile" alt="Введите username">
+                            </div>
+                        </div>
+                        
                         <div class="password-container">
                             <div class="password-input">
                                 <input type="password" id="password" name="password" placeholder="Пароль" required>
@@ -62,11 +67,16 @@
                         </script>
                     </div>
                     <button class="btn-login" type="submit">Войти</button>
+
+                    <div class="error-auth">
+                        {% if error_message %}
+                            <p class="error-message-login">{{ error_message }}</p>
+                        {% endif %}
+                    </div>
                 </form>
+
             </div>
-            {% if error_message %}
-                <p class="error-message-login">{{ error_message }}</p>
-            {% endif %}
+            
         </div>
     </div>
     {% endblock %}

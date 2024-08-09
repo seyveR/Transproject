@@ -94,6 +94,25 @@ body, html {
 
     cursor: pointer;
 }
+.button-login {
+    flex: none;
+    background-color: #1C425F;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 40px;
+    font-size: 24px;
+    font-weight: 500;
+    border-radius: 7px;
+    border: 2px solid transparent;
+}
+
+.button-login:hover {
+    background-color: #fff;
+    color: #1C425F;
+    border-color: #1C425F;
+
+    cursor: pointer;
+}
 
 
 /*  ОСНОВНЫЕ СТИЛИ ДЛЯ БЛОКА ПРИЕМКИ  */
@@ -114,7 +133,7 @@ body, html {
     font-size: 42px;
     letter-spacing: .3px;
     font-family: 'Inter';
-    background-color: #49687F;
+    background-color: #1C425F;
 
 }
 
@@ -276,3 +295,252 @@ i.fas.fa-bars, i.fas.fa-times {
     height: 40px;
 }
 
+@media screen and (max-width: 1550px) and (max-height: 840px) {
+    .container {
+        margin: 20px 40px;
+        font-family: 'Open Sans', sans-serif;
+    }
+    
+    .header:after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 1px; 
+        background-color: #fff; 
+    
+        opacity: 0.7;
+        border-color: transparent;
+        border-style: solid;
+        box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.3);
+    }
+    
+    .header-line {
+        padding-top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        letter-spacing: .3px;
+    }
+    
+    
+    .header-logo {
+        flex-shrink: 0;
+        margin-left: -0px;
+    }
+    
+    .header-logo img{
+        flex-shrink: 0;
+        width: 260px;
+        height: 55px;
+        
+    }
+    
+    .nav-item {
+        color: #C4C4C4;
+        text-decoration: none;
+        font-weight: 300;
+        font-size: 20px;
+    
+        margin-right: 40px;
+        transition: color 0.3s linear;
+    }
+    
+    .active {
+        color: #1C425F!important;
+        text-decoration: none!important;
+    }
+    
+    .nav-item:hover{
+        color: #000;
+    }
+    
+    .nav {
+        padding-right: 140px;
+        height: 100%;
+        align-items: center;
+        
+    }
+    
+    .button-log {
+        flex: none;
+        background-color: rgb(180, 40, 40);
+        color: #fff;
+        text-decoration: none;
+        padding: 15px 40px;
+        font-size: 24px;
+        font-weight: 500;
+        border-radius: 7px;
+        border: 2px solid transparent;
+    }
+    
+    .button-log:hover {
+        background-color: #fff;
+        color: rgb(180, 40, 40);
+        border-color: rgb(180, 40, 40);
+    
+        cursor: pointer;
+    }
+    .button-login {
+        flex: none;
+        background-color: #1C425F;
+        color: #fff;
+        text-decoration: none;
+        padding: 15px 40px;
+        font-size: 24px;
+        font-weight: 500;
+        border-radius: 7px;
+        border: 2px solid transparent;
+    }
+    
+    .button-login:hover {
+        background-color: #fff;
+        color: #1C425F;
+        border-color: #1C425F;
+    
+        cursor: pointer;
+    }
+    
+    
+    /*  ОСНОВНЫЕ СТИЛИ ДЛЯ БЛОКА ПРИЕМКИ  */
+    
+    .main-container {
+        margin: 0px 20px;
+        font-family: 'Inter';
+    }
+    
+    .header-content {
+        padding-top: 0px;
+        letter-spacing: .3px;
+    }
+    
+    .title {
+        color: #fff;
+        font-weight: 700;
+        font-size: 32px;
+        letter-spacing: .3px;
+        font-family: 'Inter';
+        background-color: #1C425F;
+    
+    }
+    
+    .title-text {
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+        position: relative;
+        height: 100%;
+        padding: 50px 100px;
+    }
+    
+    .fas img {
+        width: 60px;
+        height: 40px;
+    }
+    
+    #menu-check {
+        display: none;
+    }
+    
+    .fa-times {
+        display: none;
+    }
+    
+    .block {
+        display: block;
+    }
+    
+    .disp {
+        display: none;
+    }
+    
+    .tool-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 405px;
+        height: 100%;
+        background: rgba(255, 255, 255, .8);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+        z-index: 100;
+        backdrop-filter: blur(5px);
+    
+        left: -40%;
+        transition: .6s ease;
+    
+    }
+    
+    #menu-check:checked ~ .tool-menu {
+        left: 0;
+    }
+    
+    #menu-check:checked ~ label .fa-bars {
+        display: none;
+    }
+    
+    #menu-check:checked ~ label .fa-times {
+        display: block;
+    }
+    
+    .username {
+        padding: 12px;
+        text-align: left;
+        color: #000;
+        font-family: 'Inter';
+        font-size: 28px;
+    
+    }
+    
+    .nav-menu {
+        margin-top: 30px;
+    }
+    
+    .nav-menu-item {
+        margin-top: 8px;
+        padding: 3px 7px;
+        text-align: left;
+        text-decoration: none;
+        color: #000;
+        font-family: 'Inter';
+        font-size: 28px;
+        text-align: center;
+    }
+    
+    .tool-menu .btn {
+        padding: 10px;
+        text-align: center;
+    }
+    
+    .btn {
+        position: fixed;
+        bottom: 0;
+        align-items: center;
+        left: 28%;
+    }
+    
+    .btn-menu {
+        margin-top: 10px;
+    }
+    
+    i.fas.fa-bars, i.fas.fa-times {
+        cursor: pointer;
+    }
+    
+    #header-logo {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .tool-logo {
+        text-align: center;
+        padding: 30px 0px;
+        background-color: rgba(28,66,95, 1);
+        backdrop-filter: blur(5px);
+        z-index: 100;
+    }
+    
+    .tool-logo img{
+        width: 250px;
+        height: 40px;
+    }
+}

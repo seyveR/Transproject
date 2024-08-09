@@ -1,10 +1,10 @@
 .main-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
     height: 87vh;
     width: 101%;
+    margin: 0px 0px;
+    padding: 0px 0px;
+    font-family: 'Inter';
 }
 
 .background-overlay {
@@ -36,13 +36,30 @@
     z-index: 2; /* Содержимое будет выше затемнения */
 }
 
+.auth-startpage-content {
+    position: relative;
+    z-index: 2; /* Содержимое будет выше затемнения */
+}
+
 .startpage-content {
    text-align: center;
 }
 
+.auth-startpage-content {
+    text-align: center;
+ }
+
 .startpage-title {
+    padding-top: 200px;
     color: #fff;
     font-size: 80px;
+    font-family: 'Inter';
+}
+
+.auth-startpage-title {
+    padding-top: 40px;
+    color: #fff;
+    font-size: 60px;
     font-family: 'Inter';
 }
 
@@ -74,4 +91,124 @@
     border-color: #fff;
 
     cursor: pointer;
+}
+
+.auth-startpage-cards {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Inter';
+    margin: 0px 120px
+}
+
+.auth-card {
+    background-color: #fff;
+    border-radius: 10px;
+    height: 500px;
+    width: 365px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.auth-card-photo img {
+    width: 340px;
+    height: 190px;
+}
+
+.auth-card-photo {
+    padding: 10px;
+}
+
+.auth-card-title {
+    font-size: 26px;
+    color: #1C425F;
+    margin: 20px 0px;
+    font-weight: 700;
+}
+
+.auth-card-text {
+    font-size: 15px;
+    color: #000;
+}
+
+.auth-card-btn {
+    margin-top: auto;
+    padding: 20px 0px;
+}
+
+.button-auth-startpage {
+    flex: none;
+    background-color: #1C425F;
+    color: #fff;
+    width: 340px;
+    text-decoration: none;
+    padding: 5px 20px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 7px;
+    border: 2px solid transparent;
+    /* bottom: 0px; */
+}
+
+.button-auth-startpage:hover {
+    background-color: #fff;
+    color: #1C425F;
+    border-color: #1C425F;
+
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1550px) and (max-height: 840px) {
+    .main-body {
+        position: relative;
+        height: 88vh;
+        width: 101%;
+        margin: 0px 0px;
+        padding: 0px 0px;
+        font-family: 'Inter';
+    }
+
+    .startpage-title {
+        color: #fff;
+        font-size: 60px;
+        font-family: 'Inter';
+    }
+
+    .auth-startpage-title {
+        color: #fff;
+        font-size: 40px;
+        font-family: 'Inter';
+        margin-bottom: 50px;
+    }
+    
+    .startpage-subtitle {
+        color: #fff;
+        font-size: 24px;
+        margin-top: 30px;
+        font-family: 'Inter';
+    }
+    
+    .log-btn {
+        /* flex: none; */
+        margin-top: 30px;
+        background-color: transparent;
+        color: #fff;
+        text-decoration: none;
+        /* width: 120px; */
+        padding: 10px 26px;
+        font-size: 28px;
+        font-weight: 500;
+        border-radius: 7px;
+        border: 3px solid #fff;
+        font-family: 'Inter';
+    }
+    
+    .log-btn:hover {
+        background-color: #fff;
+        color: #1C425F;
+        border-color: #fff;
+    
+        cursor: pointer;
+    }
 }

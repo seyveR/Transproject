@@ -87,7 +87,8 @@ class PreProcessView(LoginMixin):
 
 
         if car_number_photo:
-            response = requests.post('https://70c2-95-54-230-29.ngrok-free.app/predict_plate_text', json=files)
+            response = requests.post('https://127.0.0.1', json=files)
+            print(response.status_code)
             if response.status_code == 200:
                 car_number = response.text 
                 print(car_number)

@@ -34,6 +34,72 @@
         </div>
     </div>
     {% else %}
+    <div class="auth-startpage-content">
+        <div class="auth-startpage-title">
+            Выберите действие для дальнейшей<br>
+            работы с грузами
+        </div>
+    
+        <div class="auth-startpage-cards">
+            <div class="auth-card">
+                <div class="auth-card-photo">
+                    <img src="{% static 'files/auth-photo.jpg' %}" alt="">
+                </div>
+                <div class="auth-card-title">
+                    ПРИЕМКА
+                </div>
+                <div class="auth-card-text">
+                    Прием груза путем загрузки<br> 
+                    фотогорафий транспотрной<br> 
+                    накладной и номера<br> 
+                    траспортного средства.<br>
+                    Формирование Акта общей формы<br> 
+                    по поступившему грузу.
+                </div>
+                <div class="auth-card-btn">
+                    <a href="/priemka">
+                        <button class="button-auth-startpage">Перейти</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="auth-card">
+                <div class="auth-card-photo">
+                    <img src="{% static 'files/auth-photo.jpg' %}" alt="">
+                </div>
+                <div class="auth-card-title">
+                    ХРАНЕНИЕ
+                </div>
+                <div class="auth-card-text">
+                    Управление складскими запасами
+                </div>
+                <div class="auth-card-btn">
+                    <a href="/keeping">
+                        <button class="button-auth-startpage">Перейти</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="auth-card">
+                <div class="auth-card-photo">
+                    <img src="{% static 'files/auth-photo.jpg' %}" alt="">
+                </div>
+                <div class="auth-card-title">
+                    ОТГРУЗКА
+                </div>
+                <div class="auth-card-text">
+                    Отгрузка со склада путем<br> 
+                    проверки актуальности данных,<br>
+                    полученных во время приемки груза.
+                </div>
+                <div class="auth-card-btn">
+                    <a href="/otgruzka">
+                        <button class="button-auth-startpage">Перейти</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {% endif %}
     
